@@ -1,16 +1,16 @@
 import { LogApiResource } from '@twilio-labs/serverless-api';
 import { LogsConfig } from '../config/logs';
 import { writeOutput } from '../utils/output';
+import { OutputFormat } from '../commands/shared';
 
 export function printLogs(
   result: LogApiResource[],
-  config: LogsConfig,
-  outputFormat?: string
+  outputFormat: OutputFormat
 ) {
   result.forEach(log => printLog(log, outputFormat));
 }
 
-export function printLog(log: LogApiResource, outputFormat?: string) {
+export function printLog(log: LogApiResource, outputFormat: OutputFormat) {
   if (outputFormat === 'json') {
     writeOutput(JSON.stringify(log));
   } else {

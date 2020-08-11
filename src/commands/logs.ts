@@ -42,7 +42,6 @@ export async function handler(
   externalCliOptions?: ExternalCliOptions
 ): Promise<void> {
   setLogLevelByName(flags.logLevel);
-
   let config: LogsConfig;
   try {
     config = await getConfigFromFlags(flags, externalCliOptions);
@@ -68,11 +67,11 @@ export async function handler(
     if (flags.tail) {
       const stream = await client.getLogsStream({ ...config });
       stream.on('data', (log: LogApiResource) => {
-        printLog(log, config.outputFormat);
+        printLog(log, flags.outputFormat);
       });
     } else {
       const result = (await client.getLogs({ ...config })) as LogApiResource[];
-      printLogs(result, config, config.outputFormat);
+      printLogs(result, flags.outputFormat);
     }
   } catch (err) {
     handleError(err);
@@ -99,13 +98,6 @@ export const cliInfo: CliInfo = {
     tail: {
       type: 'boolean',
       describe: 'Continuously stream the logs',
-    },
-    'output-format': {
-      type: 'string',
-      alias: 'o',
-      default: '',
-      describe: 'Output the log in a different format',
-      choices: ['', 'json'],
     },
     env: {
       type: 'string',

@@ -10,13 +10,14 @@ import terminalLink from 'terminal-link';
 import { MergeExclusive } from 'type-fest';
 import { DeployLocalProjectConfig } from '../config/deploy';
 import { logger } from '../utils/logger';
-import { writeOutput } from '../utils/output';
+import { writeOutput, writeJSONOutput } from '../utils/output';
 import {
   getTwilioConsoleDeploymentUrl,
   printObjectWithoutHeaders,
   redactPartOfString,
   shouldPrettyPrint,
 } from './utils';
+import { OutputFormat } from '../commands/shared';
 
 function sortByAccess<
   T extends MergeExclusive<AssetResource, FunctionResource>
@@ -83,7 +84,7 @@ function prettyPrintConfigInfo(config: DeployLocalProjectConfig) {
   }
 
   logger.info('\nDeploying functions & assets to the Twilio Runtime');
-  writeOutput(
+  logger.info(
     chalk`
 {bold.cyan Account}\t\t${config.username}
 {bold.cyan Token}\t\t${redactPartOfString(config.password)}
@@ -171,7 +172,13 @@ function prettyPrintDeployedResources(
   }
 }
 
-export function printConfigInfo(config: DeployLocalProjectConfig) {
+export function printConfigInfo(
+  config: DeployLocalProjectConfig,
+  outputFormat: OutputFormat
+) {
+  if (outputFormat === 'json') {
+    return;
+  }
   if (shouldPrettyPrint) {
     prettyPrintConfigInfo(config);
   } else {
@@ -181,8 +188,13 @@ export function printConfigInfo(config: DeployLocalProjectConfig) {
 
 export function printDeployedResources(
   config: DeployLocalProjectConfig,
-  result: DeployResult
+  result: DeployResult,
+  outputFormat: OutputFormat
 ) {
+  if (outputFormat === 'json') {
+    writeJSONOutput(result);
+    return;
+  }
   if (shouldPrettyPrint) {
     prettyPrintDeployedResources(config, result);
   } else {

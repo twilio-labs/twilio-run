@@ -9,6 +9,7 @@ import { setLogLevelByName, logger } from '../utils/logger';
 import { baseCliOptions, BaseFlags, ExternalCliOptions } from './shared';
 import { CliInfo } from './types';
 import { getFullCommand } from './utils';
+import { printNewResult } from '../printers/new';
 
 export type NewCliFlags = Arguments<
   BaseFlags & {
@@ -114,6 +115,7 @@ export async function handler(
 
   try {
     await downloadTemplate(flags.template, sanitizedNamespace, targetDirectory);
+    printNewResult(sanitizedNamespace, flags.template);
   } catch (error) {
     logger.error(error.message, error.name);
   }

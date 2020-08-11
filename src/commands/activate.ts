@@ -64,7 +64,7 @@ export async function handler(
 
   checkConfigForCredentials(config);
 
-  printActivateConfig(config);
+  printActivateConfig(config, flags.outputFormat);
 
   const details = config.buildSid
     ? `(${config.buildSid})`
@@ -79,7 +79,7 @@ export async function handler(
       `Activated new build ${details} on ${config.targetEnvironment ||
         'production'}`
     );
-    printActivateResult(result);
+    printActivateResult(result, flags.outputFormat);
   } catch (err) {
     handleError(err, spinner);
   }

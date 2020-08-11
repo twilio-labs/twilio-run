@@ -16,8 +16,9 @@ import logSymbols from 'log-symbols';
 import title from 'title';
 import { ListConfig } from '../config/list';
 import { logger } from '../utils/logger';
-import { writeOutput } from '../utils/output';
+import { writeOutput, writeJSONOutput } from '../utils/output';
 import { redactPartOfString, shouldPrettyPrint, windowSize } from './utils';
+import { OutputFormat } from '../commands/shared';
 
 type KeyMaps = {
   [key in ListOptions]: string[];
@@ -313,7 +314,15 @@ function printListResultTerminal(result: ListResult, config: ListConfig): void {
   writeOutput(output);
 }
 
-export function printListResult(result: ListResult, config: ListConfig): void {
+export function printListResult(
+  result: ListResult,
+  config: ListConfig,
+  outputFormat: OutputFormat
+): void {
+  if (outputFormat === 'json') {
+    writeJSONOutput(result);
+    return;
+  }
   if (shouldPrettyPrint && !config.properties && !config.extendedOutput) {
     printListResultTerminal(result, config);
   } else {

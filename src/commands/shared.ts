@@ -1,8 +1,11 @@
 import { Options } from 'yargs';
 import { LoggingLevel, LoggingLevelNames } from '../utils/logger';
 
+export type OutputFormat = 'json' | 'pretty' | undefined;
+
 export type BaseFlags = {
   logLevel: LoggingLevelNames;
+  outputFormat: OutputFormat;
 };
 
 export type SharedFlags = BaseFlags & {
@@ -36,6 +39,13 @@ export const baseCliOptions: { [key: string]: Options } = {
     alias: 'l',
     describe: 'Level of logging messages.',
     choices: Object.keys(LoggingLevel),
+  },
+  'output-format': {
+    type: 'string',
+    default: 'pretty',
+    alias: 'o',
+    describe: 'Format of command output.',
+    choices: ['json', 'pretty'],
   },
 };
 
