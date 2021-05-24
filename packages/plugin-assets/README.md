@@ -65,7 +65,7 @@ OPTIONS
                                    would like to display (JSON output always shows all properties).
 ```
 
-_See code: [src/commands/assets/init.js](https://github.com/twilio-labs/serverless-toolkit/blob/v1.0.0/src/commands/assets/init.js)_
+_See code: [src/commands/assets/init.js](https://github.com/twilio-labs/serverless-toolkit/blob/v1.0.1-rc.0/src/commands/assets/init.js)_
 
 ## `twilio assets:list`
 
@@ -86,7 +86,7 @@ OPTIONS
                                    (JSON output always shows all properties).
 ```
 
-_See code: [src/commands/assets/list.js](https://github.com/twilio-labs/serverless-toolkit/blob/v1.0.0/src/commands/assets/list.js)_
+_See code: [src/commands/assets/list.js](https://github.com/twilio-labs/serverless-toolkit/blob/v1.0.1-rc.0/src/commands/assets/list.js)_
 
 ## `twilio assets:upload FILE`
 
@@ -110,7 +110,7 @@ OPTIONS
                                    (JSON output always shows all properties).
 ```
 
-_See code: [src/commands/assets/upload.js](https://github.com/twilio-labs/serverless-toolkit/blob/v1.0.0/src/commands/assets/upload.js)_
+_See code: [src/commands/assets/upload.js](https://github.com/twilio-labs/serverless-toolkit/blob/v1.0.1-rc.0/src/commands/assets/upload.js)_
 <!-- commandsstop -->
 
 ## Contributing

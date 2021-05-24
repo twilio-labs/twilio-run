@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2-rc.0](https://github.com/twilio-labs/serverless-toolkit/compare/@twilio-labs/plugin-serverless@2.0.1...@twilio-labs/plugin-serverless@2.0.2-rc.0) (2021-05-24)
+
+**Note:** Version bump only for package @twilio-labs/plugin-serverless
+
+
+
+
+
 ## [2.0.1](https://github.com/twilio-labs/serverless-toolkit/compare/@twilio-labs/plugin-serverless@2.0.0...@twilio-labs/plugin-serverless@2.0.1) (2021-05-20)
 
 **Note:** Version bump only for package @twilio-labs/plugin-serverless

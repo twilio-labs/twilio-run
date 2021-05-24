@@ -1,6 +1,6 @@
 {
   "name": "@twilio-labs/serverless-api",
-  "version": "5.0.0",
+  "version": "5.1.0-rc.0",
   "description": "API-wrapper for the Twilio Serverless API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

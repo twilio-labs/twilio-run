@@ -1,6 +1,6 @@
 {
   "name": "@twilio/runtime-handler",
-  "version": "1.1.0-rc.2",
+  "version": "1.1.0-rc.3",
   "description": "Stub runtime for Twilio Functions",
   "keywords": [
     "twilio",
@@ -42,10 +42,10 @@
     "prepack": "run-s clean build"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.16",
     "@types/common-tags": "^1.8.0",
     "@types/debug": "^4.1.4",
     "@types/express-useragent": "^0.2.21",
+    "@types/jest": "^24.0.16",
     "@types/lodash.debounce": "^4.0.6",
     "@types/node": "^14.0.19",
     "@types/supertest": "^2.0.8",
@@ -61,7 +61,7 @@
     "url": "https://github.com/twilio-labs/serverless-toolkit/issues"
   },
   "dependencies": {
-    "@twilio-labs/serverless-runtime-types": "^2.0.0-beta.3",
+    "@twilio-labs/serverless-runtime-types": "2.1.0-rc.0",
     "@types/express": "4.17.7",
     "chalk": "^4.1.1",
     "chokidar": "^3.2.3",

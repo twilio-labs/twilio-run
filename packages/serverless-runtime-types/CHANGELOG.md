@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0-rc.0](https://github.com/twilio-labs/serverless-toolkit/compare/@twilio-labs/serverless-runtime-types@2.0.0...@twilio-labs/serverless-runtime-types@2.1.0-rc.0) (2021-05-24)
+
+
+### Features
+
+* extract runtime-handler and lazyLoading ([#252](https://github.com/twilio-labs/serverless-toolkit/issues/252)) ([4b11e69](https://github.com/twilio-labs/serverless-toolkit/commit/4b11e693248e44a8c6db4a95cf90e79e00f7db08))
+
+
+
+
+
 # [2.0.0](https://github.com/twilio-labs/serverless-toolkit/compare/@twilio-labs/serverless-runtime-types@2.0.0-beta.3...@twilio-labs/serverless-runtime-types@2.0.0) (2021-05-19)
 
 **Note:** Version bump only for package @twilio-labs/serverless-runtime-types

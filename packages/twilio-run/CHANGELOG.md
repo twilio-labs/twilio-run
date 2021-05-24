@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0-rc.0](https://github.com/twilio-labs/serverless-toolkit/compare/twilio-run@3.0.1...twilio-run@3.1.0-rc.0) (2021-05-24)
+
+
+### Features
+
+* extract runtime-handler and lazyLoading ([#252](https://github.com/twilio-labs/serverless-toolkit/issues/252)) ([4b11e69](https://github.com/twilio-labs/serverless-toolkit/commit/4b11e693248e44a8c6db4a95cf90e79e00f7db08))
+
+
+
+
+
 ## [3.0.1](https://github.com/twilio-labs/serverless-toolkit/compare/twilio-run@3.0.0...twilio-run@3.0.1) (2021-05-20)
 
 
