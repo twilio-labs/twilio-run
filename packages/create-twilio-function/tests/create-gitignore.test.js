@@ -57,6 +57,7 @@ describe('create-gitignore', () => {
       });
       expect(contents).toMatch('*.log');
       expect(contents).toMatch('.env');
+      expect(contents).toMatch('.twiliodeployinfo');
       cleanUp();
     });
 
