@@ -6,6 +6,7 @@ import {
   TwilioClientOptions,
   TwilioPackage,
 } from '@twilio-labs/serverless-runtime-types/types';
+import chalk from 'chalk';
 import { fork } from 'child_process';
 import {
   NextFunction,
@@ -23,6 +24,7 @@ import * as Runtime from './internal/runtime';
 import { ServerConfig } from './types';
 import debug from './utils/debug';
 import { wrapErrorInHtml } from './utils/error-html';
+import { getCodeLocation } from './utils/getCodeLocation';
 import { requireFromProject } from './utils/requireFromProject';
 import { cleanUpStackTrace } from './utils/stack-trace/clean-up';
 
@@ -37,6 +39,60 @@ let twilio: TwilioPackage;
 
 export function constructEvent<T extends {} = {}>(req: ExpressRequest): T {
   return { ...req.query, ...req.body };
+}
+
+export function augmentContextWithOptionals(
+  config: ServerConfig,
+  context: Context
+): Context<{
+  ACCOUNT_SID?: string;
+  AUTH_TOKEN?: string;
+  DOMAIN_NAME: string;
+  PATH: string;
+  SERVICE_SID: string | undefined;
+  ENVIRONMENT_SID: string | undefined;
+  [key: string]: string | undefined | Function;
+}> {
+  log('Adding getters with warnings to optional properties');
+  if (typeof context.SERVICE_SID === 'undefined') {
+    let _serviceSid: string | undefined = undefined;
+    Object.defineProperty(context, 'SERVICE_SID', {
+      get: () => {
+        if (_serviceSid === undefined) {
+          console.warn(
+            chalk`{bold.yellow WARNING} at ${getCodeLocation({
+              relativeFrom: config.baseDir,
+              offset: 1,
+            })} The SERVICE_SID variable is undefined by default in local development. This variable will be autopopulated when your Functions get deployed. Learn more at: https://twil.io/toolkit-variables`
+          );
+        }
+        return _serviceSid;
+      },
+      set: (value: string) => {
+        _serviceSid = value;
+      },
+    });
+  }
+  if (typeof context.ENVIRONMENT_SID === 'undefined') {
+    let _environmentSid: string | undefined = undefined;
+    Object.defineProperty(context, 'ENVIRONMENT_SID', {
+      get: () => {
+        if (_environmentSid === undefined) {
+          console.warn(
+            chalk`{bold.yellow WARNING} at ${getCodeLocation({
+              relativeFrom: config.baseDir,
+              offset: 1,
+            })}: The ENVIRONMENT_SID variable is undefined by default in local development. This variable will be autopopulated when your Functions get deployed. Learn more at: https://twil.io/toolkit-variables`
+          );
+        }
+        return _environmentSid;
+      },
+      set: (value: string) => {
+        _environmentSid = value;
+      },
+    });
+  }
+  return context;
 }
 
 export function constructContext<T extends {} = {}>(
@@ -74,7 +130,15 @@ export function constructContext<T extends {} = {}>(
   }
   const DOMAIN_NAME = url.replace(/^https?:\/\//, '');
   const PATH = functionPath;
-  return { PATH, DOMAIN_NAME, ...env, getTwilioClient };
+  const context = {
+    PATH,
+    DOMAIN_NAME,
+    SERVICE_SID: undefined,
+    ENVIRONMENT_SID: undefined,
+    ...env,
+    getTwilioClient,
+  };
+  return context;
 }
 
 export function constructGlobalScope(config: ServerConfig): void {

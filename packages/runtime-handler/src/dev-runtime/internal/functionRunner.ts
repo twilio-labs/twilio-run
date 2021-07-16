@@ -1,6 +1,11 @@
 import { ServerlessCallback } from '@twilio-labs/serverless-runtime-types/types';
 import { serializeError } from 'serialize-error';
-import { constructContext, constructGlobalScope, isTwiml } from '../route';
+import {
+  augmentContextWithOptionals,
+  constructContext,
+  constructGlobalScope,
+  isTwiml,
+} from '../route';
 import { ServerConfig } from '../types';
 import { Response } from './response';
 import { setRoutes } from './route-cache';
@@ -62,8 +67,9 @@ process.on(
     try {
       setRoutes(config.routes);
       constructGlobalScope(config);
-      const context = constructContext(config, path);
+      let context = constructContext(config, path);
       sendDebugMessage('Context for %s: %p', path, context);
+      context = augmentContextWithOptionals(config, context);
       sendDebugMessage('Event for %s: %o', path, event);
       let run_timings: { start: [number, number]; end: [number, number] } = {
         start: [0, 0],

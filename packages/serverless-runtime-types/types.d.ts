@@ -46,6 +46,9 @@ export type RuntimeInstance = {
 export type Context<T = {}> = {
   getTwilioClient(options?: TwilioClientOptions): twilio.Twilio;
   DOMAIN_NAME: string;
+  PATH: string;
+  SERVICE_SID: string | undefined;
+  ENVIRONMENT_SID: string | undefined;
 } & T;
 
 export type ServerlessCallback = (
